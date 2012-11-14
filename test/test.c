@@ -15,15 +15,19 @@ int main(int argc, char **argv) {
   printf("checking wheter string size is initialized correctly");
   MCASSERT(str->size == 13);
 
+  printf("checking wheter reference counter counts instanciated string");
+  MCASSERT(str->refcount == 1);
+
   printf("checking wheter string data is initialized correctly");
   MCASSERT(strncmp(str->data, "initial value", 13) == 0);
   free_string(str);
 
-  printf("checking wheter reference counter counts instanciated string");
-  printf(" refcount = %i", str->refcount);
-  MCASSERT(str->refcount == 1);
+  printf("checking refcount after freeing string ");
+  MCASSERT(str->refcount == 0);
+
 
   printf("checking wheter reference counter counts instanciated string with same data");
+  str = new_string("initial value");
   mcstring *new_str = new_string("initial value");
   MCASSERT(str->refcount == 2);
 
