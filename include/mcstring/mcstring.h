@@ -9,10 +9,11 @@ typedef char mcchar;
 
 typedef struct {
   size_t size;
+  unsigned int refcount;
   mcchar *data;
 } mcstring;
 
-const mcstring *new_string(const char *data);
+mcstring *new_string(const char *data);
 void free_string(mcstring *string);
 
 #endif /* MCSTRING_MCSTRING_H  */

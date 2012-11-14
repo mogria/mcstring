@@ -36,12 +36,12 @@ void mcstring_remove_reference(mcstring *reference) {
   }
 }
 
-mcstring *mcstring_reference_by_data(mcstring *reference) {
+mcstring *mcstring_reference_by_data(const char *data, size_t size) {
   mcstring *found = NULL;
   int x;
   for(x = 0; x < num_references; x++) {
-    if(references[x]->size == reference->size
-      && strncmp(references[x]->data, reference->data, reference->size) == 0) {
+    if(references[x]->size == size
+      && strncmp(references[x]->data, data, size) == 0) {
       found = references[x];
     }
   }

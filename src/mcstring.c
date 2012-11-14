@@ -1,21 +1,34 @@
 #include <mcstring/mcstring.h>
 #include "memory.h"
+#include "reference.h"
 
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
 #include <assert.h>
 
-const mcstring *new_string(const char *data) {
+mcstring *new_string(const char *data) {
+  mcstring *existed;
   mcstring *string = calloc(1, sizeof(mcstring));
   assert(string != NULL);
-  mcstring_alloc(string, strlen(data));
-  mc_strncpy(string->data, data, string->size);
-  string->data[string->size] = '\0';
+
+  string->size = strlen(data);
+
+  if((existed = mcstring_reference_by_data(data, string->size)) != NULL) {
+    free(string);
+    string = existed;
+  } else {
+    mcstring_alloc(string, string->size);
+    mc_strncpy(string->data, data, string->size);
+    string = mcstring_add_reference(string);
+  }
+  string->refcount++;
   return string;
 }
 
 void free_string(mcstring *string) {
-  mcstring_free(string);
-  free(string);
+  if(!--string->refcount) {
+    mcstring_free(string);
+    mcstring_remove_reference(string);
+  }
 }

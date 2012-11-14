@@ -8,7 +8,7 @@ void mcstring_alloc(mcstring *object, size_t size) {
     mcstring_free(object);
   } else {
     if(object->data == NULL) {
-      object->data = realloc(object->data, sizeof(mcchar) * size);
+      object->data = (char *)realloc(object->data, sizeof(mcchar) * size);
       assert(object->data != NULL);
 
       // if new size is larger initialize newly allocated uninitalized memory
