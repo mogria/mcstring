@@ -26,15 +26,17 @@
 
 // print summary of all failed tests (if there where one)
 #define MCASSERT_SUMMARY do { \
+  puts(""); \
   if(_mc_assert_num_fail > 0) { \
-    printf("\nFAIL: %i assertions. %i ok, %i fails.\n", _mc_assert_num_ok + _mc_assert_num_fail, _mc_assert_num_ok, _mc_assert_num_fail); \
+    printf("FAIL: %i assertions. %i ok, %i fails.\n", _mc_assert_num_ok + _mc_assert_num_fail, _mc_assert_num_ok, _mc_assert_num_fail); \
     int x; \
     for(x = 0; x < _mc_assert_num_fail; x++) { \
       printf("%s", _mc_assert_errorbuffer[x]); \
     } \
   } else { \
-    printf("OK: %i assertions.", _mc_assert_num_ok); \
+    printf("OK: %i assertions.\n", _mc_assert_num_ok); \
   } \
+  puts(""); \
 } while(0)
 
 // 0 if no tests failed else 1
