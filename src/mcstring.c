@@ -2,6 +2,7 @@
 #include "memory.h"
 #include "reference.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
@@ -20,7 +21,9 @@ mcstring *new_string(const char *data) {
   } else {
     mcstring_alloc(string, string->size);
     mc_strncpy(string->data, data, string->size);
+    existed = string;
     string = mcstring_add_reference(string);
+    free(existed);
   }
   string->refcount++;
   return string;

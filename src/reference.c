@@ -1,4 +1,5 @@
 #include "reference.h"
+#include <stdio.h>
 
 static mcstring **references = NULL;
 static size_t num_references = 0;
@@ -20,11 +21,11 @@ unsigned char mcstring_reference_exists(mcstring *reference) {
 }
 
 mcstring *mcstring_add_reference(mcstring *reference) {
-  mcstring *allocated_space = malloc(sizeof(mcstring)  * 1);
+  mcstring *allocated_space = malloc(sizeof(mcstring) * 1);
   references = realloc(references, sizeof(mcstring*) * ++num_references);
   memcpy(allocated_space, reference, sizeof(mcstring));
   references[num_references - 1] = allocated_space;
-  return references[num_references - 1];
+  return allocated_space;
 }
 
 void mcstring_remove_reference(mcstring *reference) {
