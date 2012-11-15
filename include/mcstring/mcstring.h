@@ -14,6 +14,13 @@ typedef struct {
 } mcstring;
 
 mcstring *new_string(const char *data);
+mcstring *wrap_string(const char *data);
+mcstring *new_sub_string(const char *data, size_t size, unsigned char copy);
+const mcchar *string_data(mcstring *string);
+size_t string_size(mcstring *string);
+mcchar *c_string(mcstring *string);
+void copy_string(char *dest, mcstring *src, size_t destsize);
+mcstring *sub_string(mcstring *string, size_t offset, size_t size);
 void free_string(mcstring *string);
 
 #endif /* MCSTRING_MCSTRING_H  */
