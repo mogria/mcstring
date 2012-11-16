@@ -79,6 +79,31 @@ mcstring *sub_string(mcstring *string, size_t offset, size_t size) {
   return new_sub_string(string->data + offset, size, 0);
 }
 
+mcstring *reverse_string(mcstring *string) {
+  int x;
+  mcchar *buffer = c_string(string);
+  mcchar tmp;
+  for(x = 0; x < string->size / 2; x++) {
+    tmp = buffer[x];
+    buffer[x] = buffer[string->size - x - 1];
+    buffer[string->size - x - 1] = tmp;
+  }
+
+  return new_string(mcchar);
+}
+
+mcchar char_string(mcstring *string, int pos) {
+  mcchar c = '\0';
+  if(pos < 0) {
+    pos = string->size + pos;
+  }
+
+  if(pos >= 0 && pos < string->size) {
+    c = string->data[pos];
+  }
+  return c;
+}
+
 void free_string(mcstring *string) {
   if(!--string->refcount) {
     mcstring_free(string);
