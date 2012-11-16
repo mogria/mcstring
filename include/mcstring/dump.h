@@ -3,6 +3,6 @@
 
 #include "mcstring.h"
 
-const char *string_hexdump(mcstring *string);
+char *string_hexdump(mcstring *string);
 
 #endif /* MCSTRING_DUMP_H */

@@ -7,11 +7,9 @@
 
 typedef char mcchar;
 
-typedef struct {
-  size_t size;
-  unsigned int refcount;
-  mcchar *data;
-} mcstring;
+struct mcstring;
+
+typedef struct mcstring mcstring;
 
 mcstring *new_string(const char *data);
 mcstring *wrap_string(const char *data);

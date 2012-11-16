@@ -1,4 +1,5 @@
 #include "reference.h"
+#include "type.h"
 #include <stdio.h>
 
 static mcstring **references = NULL;

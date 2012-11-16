@@ -1,4 +1,5 @@
 #include <mcstring/mcstring.h>
+#include "../src/type.h"
 #include <mcstring/dump.h>
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,4 +1,5 @@
 #include <mcstring/mcstring.h>
+#include "type.h"
 #include "memory.h"
 #include "reference.h"
 
@@ -89,7 +90,7 @@ mcstring *reverse_string(mcstring *string) {
     buffer[string->size - x - 1] = tmp;
   }
 
-  return new_string(mcchar);
+  return new_string(buffer);
 }
 
 mcchar char_string(mcstring *string, int pos) {
