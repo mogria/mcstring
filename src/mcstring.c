@@ -1,4 +1,3 @@
-#include <mcstring/mcstring.h>
 #include "type.h"
 #include "memory.h"
 #include "reference.h"

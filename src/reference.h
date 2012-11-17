@@ -1,7 +1,7 @@
 #ifndef MCSTRING_REFERENCE_H
 #define MCSTRING_REFERENCE_H
 
-#include <mcstring/mcstring.h>
+#include "type.h"
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,7 +1,7 @@
 #ifndef MCSTRING_MEMORY_H
 #define MCSTRING_MEMORY_H
 
-#include <mcstring/mcstring.h>
+#include "type.h"
 
 void mcstring_alloc(mcstring *object, size_t size);
 void mcstring_free(mcstring *object);
