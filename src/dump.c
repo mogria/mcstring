@@ -7,7 +7,7 @@
 #define SEGMENT_SIZE (HEX_SEGMENT_SIZE + 1)
 
 static char *hexdump_format() {
-  static char *format[10] = {};
+  static char format[10] = {};
   if(format[0] == '\0') {
     snprintf(format, 10, "%%0%iX", HEX_SEGMENT_SIZE);
   }
@@ -40,5 +40,5 @@ void file_hexdump(FILE *file, mcstring *string) {
 }
 
 void print_hexdump(mcstring *string) {
-  return file_hexdump(stdio, string);
+  return file_hexdump(stdout, string);
 }
