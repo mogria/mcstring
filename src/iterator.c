@@ -24,8 +24,8 @@ static unsigned char move_iterator(iterator *it, int by, size_t subject_size) {
 static iterator *base_iterator(void *subject) {
   iterator *it = calloc(1, sizeof(iterator));
   it->iterable = subject;
-  it->pos = -1;
-  it->valid = 0;
+  it->pos = 0;
+  it->valid = 1;
   return it;
 }
 

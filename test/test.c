@@ -1,4 +1,5 @@
 #include <mcstring/mcstring.h>
+#include <mcstring/iterator.h>
 #include "../src/type.h"
 #include <mcstring/dump.h>
 #include <stdio.h>
@@ -58,6 +59,26 @@ int main(int argc, char **argv) {
   char *dump;
   MCASSERT(strcmp(dump = string_hexdump(new_str), "69 6E 69 74 69 61 6C 20 76 61 6C 75 65") == 0);
   free(dump);
+
+
+  // --------------------------------------------------------------------- //
+  // checking the iterators                                                //
+  // --------------------------------------------------------------------- //
+  printf("checking wheter instanciating an iterator works");
+  string_it *it = string_iterator(new_str);
+  MCASSERT(it != NULL);
+
+  printf("checking wheter iterating works properly");
+  char *correctbuffer = "i n i t i a l   v a l u e ";
+  size_t result_size = strlen(correctbuffer) + 1;
+  size_t pos = 0;
+  char *resultbuffer = calloc(result_size, sizeof(mcchar));
+  for(; valid_iterator(it); iterator_next(it), pos++) {
+    snprintf(resultbuffer + (pos * 2), 3, "%c ", *(mcchar *)iterator_get(it));
+  }
+  free_iterator(it);
+  MCASSERT(strcmp(resultbuffer, correctbuffer) == 0);
+  free(resultbuffer);
 
   free_string(new_str);
   free_string(str);
