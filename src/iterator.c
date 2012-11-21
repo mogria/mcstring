@@ -24,8 +24,7 @@ static unsigned char move_iterator(iterator *it, int by, size_t subject_size) {
 static iterator *base_iterator(void *subject) {
   iterator *it = calloc(1, sizeof(iterator));
   it->iterable = subject;
-  it->pos = 0;
-  it->valid = 1;
+  iterator_rewind(it);
   return it;
 }
 
@@ -69,6 +68,11 @@ unsigned char iterator_move(iterator *iterator, int by, ...) {
   } else {
     return iterator->move(iterator, by);
   }
+}
+
+void iterator_rewind(iterator *iterator) {
+  iterator->pos = 0;
+  iterator->valid = 1;
 }
 
 unsigned char iterator_next(iterator *iterator) {

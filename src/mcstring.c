@@ -26,6 +26,10 @@ mcstring *new_sub_string(const char *data, size_t size, unsigned char copy) {
   if((existed = mcstring_reference_by_data(data, string->size)) != NULL) {
     free(string);
     string = existed;
+
+    if(!copy)  {
+      free(*(char**)&data);
+    }
   } else {
     if(copy) {
       mcstring_alloc(string, string->size);
@@ -79,19 +83,6 @@ mcstring *sub_string(mcstring *string, size_t offset, size_t size) {
   return new_sub_string(string->data + offset, size, 0);
 }
 
-mcstring *reverse_string(mcstring *string) {
-  int x;
-  mcchar *buffer = c_string(string);
-  mcchar tmp;
-  for(x = 0; x < string->size / 2; x++) {
-    tmp = buffer[x];
-    buffer[x] = buffer[string->size - x - 1];
-    buffer[string->size - x - 1] = tmp;
-  }
-
-  return new_string(buffer);
-}
-
 mcchar char_string(mcstring *string, int pos) {
   mcchar c = '\0';
   if(pos < 0) {
@@ -102,6 +93,30 @@ mcchar char_string(mcstring *string, int pos) {
     c = string->data[pos];
   }
   return c;
+}
+
+mcstring *reverse_string(mcstring *string) {
+  int x;
+  mcchar *buffer = c_string(string);
+  mcchar tmp;
+  for(x = 0; x < string->size / 2; x++) {
+    tmp = buffer[x];
+    buffer[x] = buffer[string->size - x - 1];
+    buffer[string->size - x - 1] = tmp;
+  }
+
+  return wrap_string(buffer);
+}
+
+void write_string(FILE *file, mcstring *string) {
+  int size = string_size(string) + 1;
+  mcchar data[size];
+  copy_string(data, string, size);
+  fprintf(file, "%s", data);
+}
+
+void print_string(mcstring *string) {
+  write_string(stdout, string);
 }
 
 void free_string(mcstring *string) {

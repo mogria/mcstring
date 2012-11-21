@@ -14,6 +14,7 @@ typedef struct iterator iterator;
 string_it *string_iterator(mcstring *string);
 void free_iterator(iterator *it);
 unsigned char iterator_move(iterator *it, int by, ...);
+void iterator_rewind(iterator *iterator);
 unsigned char iterator_next(iterator *it);
 unsigned char iterator_prev(iterator *it);
 void *iterator_get(iterator *it);
