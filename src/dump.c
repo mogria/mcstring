@@ -9,7 +9,7 @@
 static char *hexdump_format() {
   static char format[10] = {};
   if(format[0] == '\0') {
-    snprintf(format, 10, "%%0%iX", HEX_SEGMENT_SIZE);
+    snprintf(format, 10, "%%0%uX", (unsigned int)HEX_SEGMENT_SIZE);
   }
   return format;
 }
@@ -34,7 +34,7 @@ void file_hexdump(FILE *file, mcstring *string) {
   char *printf_format = hexdump_format();
   int x;
   for(x = 0; x < string->size; x++) {
-    fprintf(file, printf_format, string->data[x]);
+    fprintf(file, printf_format, (unsigned int)string->data[x]);
     fprintf(file, " ");
   }
 }
