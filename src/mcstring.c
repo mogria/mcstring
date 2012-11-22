@@ -108,6 +108,40 @@ mcstring *reverse_string(mcstring *string) {
   return wrap_string(buffer);
 }
 
+mcstring *ltrim_string(mcstring *string, const char *chars) {
+  size_t x, y;
+  unsigned char found = 1;
+  size_t found_counter = 0;
+  for(y = 0; y < string->size && found; y++) {
+    mcchar c = string->data[y];
+    for(x = 0; chars[x] != 0; x++) {
+      if(c == chars[x]) {
+        found_counter++;
+      }
+    }
+  }
+  return sub_string(string, found_counter, string->size - found_counter);
+}
+
+mcstring *rtrim_string(mcstring *string, const char *chars) {
+  size_t x, y;
+  unsigned char found = 1;
+  size_t found_counter = 0;
+  for(y = string->size; y > 0 && found; y--) {
+    mcchar c = string->data[y];
+    for(x = 0; chars[x] != 0; x++) {
+      if(c == chars[x]) {
+        found_counter++;
+      }
+    }
+  }
+  return sub_string(string, 0, string->size - found_counter);
+}
+
+mcstring *trim_string(mcstring *string, const char *chars) {
+  return ltrim_string(rtrim_string(string, chars), chars);
+}
+
 void write_string(FILE *file, mcstring *string) {
   int size = string_size(string) + 1;
   mcchar data[size];

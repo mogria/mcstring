@@ -31,6 +31,9 @@ mcchar char_string(mcstring *string, int pos);
 
 // manipulation
 mcstring *reverse_string(mcstring *string);
+mcstring *ltrim_string(mcstring *string, const char *chars);
+mcstring *rtrim_string(mcstring *string, const char *chars);
+mcstring *trim_string(mcstring *string, const char *chars);
 
 // output functions
 void write_string(FILE *file, mcstring *string);
