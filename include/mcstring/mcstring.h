@@ -15,7 +15,7 @@ typedef struct mcstring mcstring;
 // initializer
 mcstring *new_string(const char *data);
 mcstring *wrap_string(const char *data);
-mcstring *new_sub_string(const char *data, size_t size, unsigned char copy);
+mcstring *new_sub_string(const char *data, size_t size, unsigned char copy, unsigned free_existed);
 
 // string internals
 const mcchar *string_data(mcstring *string);

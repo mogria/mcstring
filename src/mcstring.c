@@ -9,14 +9,14 @@
 #include <assert.h>
 
 mcstring *new_string(const char *data) {
-  return new_sub_string(data, strlen(data), 1);
+  return new_sub_string(data, strlen(data), 1, 0);
 }
 
 mcstring *wrap_string(const char *data) {
-  return new_sub_string(data, strlen(data), 0);
+  return new_sub_string(data, strlen(data), 0, 1);
 }
 
-mcstring *new_sub_string(const char *data, size_t size, unsigned char copy) {
+mcstring *new_sub_string(const char *data, size_t size, unsigned char copy, unsigned free_existed) {
   mcstring *existed;
   mcstring *string = calloc(1, sizeof(mcstring));
   assert(string != NULL);
@@ -27,7 +27,7 @@ mcstring *new_sub_string(const char *data, size_t size, unsigned char copy) {
     free(string);
     string = existed;
 
-    if(!copy)  {
+    if(free_existed) {
       free(*(char**)&data);
     }
   } else {
@@ -80,7 +80,7 @@ mcstring *sub_string(mcstring *string, size_t offset, size_t size) {
     size = max_size;
   }
   
-  return new_sub_string(string->data + offset, size, 0);
+  return new_sub_string(string->data + offset, size, 0, 0);
 }
 
 mcchar char_string(mcstring *string, int pos) {
