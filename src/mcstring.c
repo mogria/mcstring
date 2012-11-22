@@ -31,6 +31,7 @@ mcstring *new_sub_string(const char *data, size_t size, unsigned char copy, unsi
       free(*(char**)&data);
     }
   } else {
+    string->copied_data = copy;
     if(copy) {
       mcstring_alloc(string, string->size);
       mc_strncpy(string->data, data, string->size);

@@ -23,6 +23,8 @@ void mcstring_alloc(mcstring *object, size_t size) {
 }
 
 void mcstring_free(mcstring *object) {
-  free(*(mcchar **)&object->data);
+  if(object->copied_data) {
+    free(*(mcchar **)&object->data);
+  }
   object->size = 0;
 }

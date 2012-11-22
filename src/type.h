@@ -5,7 +5,8 @@
 
 struct mcstring {
   size_t size;
-  unsigned int refcount;
+  unsigned short int refcount;
+  unsigned char copied_data;
   const mcchar *data;
 };
 
